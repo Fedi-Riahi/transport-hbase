@@ -7,3 +7,15 @@ services:
       - "9090:9090"
     environment:
       - HBASE_MANAGES_ZK=true
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
